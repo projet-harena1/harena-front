@@ -1,0 +1,9 @@
+{
+    "name":"especes",
+    "date":"10/05/24",
+    "valeur":-60,
+    "flux":[{
+        "name":"especes",
+        "valeur contable":50
+    }]
+}
