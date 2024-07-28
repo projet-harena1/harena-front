@@ -1,47 +1,38 @@
 "use client";
-import {
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Typography,
-} from "@mui/material";
+import { Dashboard, RemoveRedEye } from "@mui/icons-material";
+import { Button, Grid, Typography } from "@mui/material";
+import { useRouter, usePathname } from "next/navigation";
 import React from "react";
 
 const LeftBar = () => {
-  const [age, setAge] = React.useState("");
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+  const handleDashBoard = () => {
+    router.push("/dashboard");
   };
+  const handleShow = () => {
+    router.push("/list-heritage");
+  };
+
   return (
     <>
       <Grid container width={"100%"} p={2}>
-        <Grid container width={"100%"} justifyContent={'center'}>
+        <Grid container width={"100%"} justifyContent={"center"}>
           <Typography variant="h5" fontWeight={"bold"} color={"#0fc200"}>
-            Dashboard
+            Menu
           </Typography>
         </Grid>
-        <Grid container>
-          <FormControl sx={{  minWidth: 120 }} size="small" fullWidth>
-            <InputLabel id="demo-select-small-label">Name</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-small"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
+        <Grid container borderTop={"black solid 1px"} py={2} justifyContent={'center'}>
+          <Button
+            variant="text"
+            color="inherit"
+            endIcon={<RemoveRedEye />}
+            onClick={handleShow}
+       
+          >
+            Voir tous
+          </Button>
         </Grid>
       </Grid>
     </>

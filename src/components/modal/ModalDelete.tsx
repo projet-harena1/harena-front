@@ -23,9 +23,9 @@ const style = {
   p: 4,
 };
 
-export default function ModalCreate(props: any) {
-  const [name ,setName]=React.useState('');
-  const [poccesseur, setPoccesseur]=React.useState('');
+export default function ModalDelete(props: any) {
+  const [name, setName] = React.useState("");
+  const [poccesseur, setPoccesseur] = React.useState("");
   const [openSucces, setOpenSucces] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
   const currentDate = new Date();
@@ -33,16 +33,19 @@ export default function ModalCreate(props: any) {
   const open = props.open;
   const setOpen = props.setOpen;
   const setLoad = props.load;
+  const datas = props.data;
   const handleClose = () => setOpen(false);
   const handleClick = async () => {
     const url = UrlSite("patrimoines");
-    const data = [{
-      nom: name,
-      t: formattedDate,
-      possesseur: {
-        nom: poccesseur,
+    const data = [
+      {
+        nom: name,
+        t: formattedDate,
+        possesseur: {
+          nom: poccesseur,
+        },
       },
-    }];
+    ];
 
     try {
       const response = await axios.put(url, data);
@@ -84,31 +87,14 @@ export default function ModalCreate(props: any) {
           <Box sx={style} borderRadius={2}>
             <Typography
               id="transition-modal-title"
-              variant="h5"
+              variant="h6"
               fontWeight={"bold"}
               textAlign={"center"}
             >
-              Creer patrimoine
+              Vous ests sur de supprimer le <br />
+              {datas.nom}
             </Typography>
             <Grid container>
-              <Grid container my={1}>
-                <TextField
-                  variant="outlined"
-                  label="Name"
-                  fullWidth
-                  size="small"
-                  onChange={(e)=>{setName(e.target.value)}}
-                  />
-              </Grid>{" "}
-              <Grid container my={1}>
-                <TextField
-                  variant="outlined"
-                  label="Proprietor"
-                  fullWidth
-                  size="small"
-                  onChange={(e)=>{setPoccesseur(e.target.value)}}
-                />
-              </Grid>
               <Grid container my={1} justifyContent={"flex-end"}>
                 <Grid mx={1}>
                   <Button
@@ -123,10 +109,10 @@ export default function ModalCreate(props: any) {
                   <Button
                     variant="contained"
                     color="inherit"
-                    sx={{ bgcolor: "black", color: "#15f800" }}
+                    sx={{ bgcolor: "black", color: "red" }}
                     onClick={handleClick}
                   >
-                    Valider
+                    Supprimer{" "}
                   </Button>
                 </Grid>
               </Grid>
