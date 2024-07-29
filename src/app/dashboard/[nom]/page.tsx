@@ -49,7 +49,7 @@ function Page() {
   }, []);
   return (
     <>
-      <Grid container maxHeight={"100vh"} overflow={"hidden"}>
+      <Grid container>
         <Grid container>
           <TopBar />
         </Grid>

@@ -35,29 +35,29 @@ export default function ModalDelete(props: any) {
   const setLoad = props.load;
   const datas = props.data;
   const handleClose = () => setOpen(false);
-  const handleClick = async () => {
-    const url = UrlSite("patrimoines");
-    const data = [
-      {
-        nom: name,
-        t: formattedDate,
-        possesseur: {
-          nom: poccesseur,
-        },
-      },
-    ];
+  // const handleClick = async () => {
+  //   const url = UrlSite("patrimoines");
+  //   const data = [
+  //     {
+  //       nom: name,
+  //       t: formattedDate,
+  //       possesseur: {
+  //         nom: poccesseur,
+  //       },
+  //     },
+  //   ];
 
-    try {
-      const response = await axios.put(url, data);
-      console.log("Réponse du serveur:", response.data);
-      setOpen(false);
-      setOpenSucces(true);
-      setLoad(true);
-    } catch (error) {
-      console.error("Erreur:", error);
-      setOpenSucces(true);
-    }
-  };
+  //   try {
+  //     const response = await axios.put(url, data);
+  //     console.log("Réponse du serveur:", response.data);
+  //     setOpen(false);
+  //     setOpenSucces(true);
+  //     setLoad(true);
+  //   } catch (error) {
+  //     console.error("Erreur:", error);
+  //     setOpenSucces(true);
+  //   }
+  // };
   return (
     <div>
       <TosteSucces
@@ -110,7 +110,7 @@ export default function ModalDelete(props: any) {
                     variant="contained"
                     color="inherit"
                     sx={{ bgcolor: "black", color: "red" }}
-                    onClick={handleClick}
+                    // onClick={handleClick}
                   >
                     Supprimer{" "}
                   </Button>
