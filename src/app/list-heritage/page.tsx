@@ -1,4 +1,5 @@
 "use client";
+import Waiter from "@/components/common/Waiter";
 import LeftBar from "@/components/layout/LeftBar";
 import TopBar from "@/components/layout/TopBar";
 import ListHeritage from "@/components/ListHeritage";
@@ -8,9 +9,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function Page() {
- 
   const [datas, setData] = useState<any>([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [load, setLoad] = useState<any>(false);
   const [loading, setLoading] = useState<any>(false);
   useEffect(() => {
@@ -30,7 +30,7 @@ function Page() {
     fetchData();
   }, [loading]);
   if (!load) {
-    return <h1>loading</h1>;
+    return <Waiter loadingState={!load} />;
   } else {
     return (
       <>
@@ -49,7 +49,11 @@ function Page() {
             </Grid>
             <Grid container sm={10}>
               <Grid container maxHeight={"75vh"} p={2}>
-                <ListHeritage load={setLoading} data={datas} setName={setName}/>
+                <ListHeritage
+                  load={setLoading}
+                  data={datas}
+                  setName={setName}
+                />
               </Grid>
             </Grid>
           </Grid>

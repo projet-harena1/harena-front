@@ -9,8 +9,8 @@ import { BorderRight } from "@mui/icons-material";
 import { Grid, TextField } from "@mui/material";
 import axios from "axios";
 import { UrlSite } from "@/utils";
-import TosteSucces from "../toste/TosteSucces";
-import TosteError from "../toste/TosteErro";
+import TosteSucces from "../common/toste/TosteSucces";
+import TosteError from "../common/toste/TosteErro";
 
 const style = {
   position: "absolute" as "absolute",

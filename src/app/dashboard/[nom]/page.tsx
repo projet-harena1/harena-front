@@ -1,9 +1,20 @@
 "use client";
 import LeftBar from "@/components/layout/LeftBar";
 import TopBar from "@/components/layout/TopBar";
-import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
+import { UrlSite } from "@/utils";
+import {
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { LineChart } from "@mui/x-charts";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
@@ -23,7 +34,19 @@ function Page() {
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
+  const [data, setData] = useState<any>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(UrlSite(`patrimoines?page=1&page_size=10`));
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    fetchData();
+  }, []);
   return (
     <>
       <Grid container maxHeight={"100vh"} overflow={"hidden"}>
@@ -36,7 +59,7 @@ function Page() {
           </Grid>
           <Grid container sm={10} pt={2}>
             <Grid container justifyContent={"space-around"}>
-            <Grid container sm={3.5}>
+              <Grid container sm={3.5}>
                 <FormControl sx={{ minWidth: 120 }} size="small" fullWidth>
                   <InputLabel id="demo-select-small-label">Name</InputLabel>
                   <Select
@@ -46,12 +69,11 @@ function Page() {
                     label="Age"
                     onChange={handleChange}
                   >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {data.map((item:any) => (
+                      <MenuItem key={item.nom} value={item.nom}>
+                        {item.possesseur.nom}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>
@@ -75,7 +97,6 @@ function Page() {
                   type="date"
                 />
               </Grid>
-             
             </Grid>
             <Grid container maxHeight={"75vh"} borderTop={"black solid 1px"}>
               <LineChart
